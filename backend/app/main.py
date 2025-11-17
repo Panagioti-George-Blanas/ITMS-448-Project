@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # This code is the start to grab authentication from Spotify to be able to get songs on the website. -Henry
-=======
-# main.py  ← this becomes your main Flask file
->>>>>>> fef23299b8eebaf73cc3451b89d416714d0af7db
 
 from flask import Flask, redirect, request, session, render_template
 from dotenv import load_dotenv
