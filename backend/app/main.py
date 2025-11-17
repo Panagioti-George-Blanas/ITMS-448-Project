@@ -103,3 +103,40 @@ class GenreRecommendationSystem:
         idx = self.movies_df[self.movies_df["title"].str.lower() == movie_title.lower()].index
         if len(idx) == 0:
             return "Movie not found!"
+        idx = idx[0]
+        movie_vector = self.movies_df.iloc[idx]["genre_embeddings"]
+
+        # Compute similarity with music tracks
+        similarities = cosine_similarity([movie_vector], np.stack(self.music_df["genre_embeddings"].values))[0]
+        top_indices = np.argsort(similarities)[::-1][:num_recommendations]
+        
+        return self.music_df.iloc[top_indices]["track_names"].tolist()
+
+
+class BidirectionalRecommendationSystem(GenreRecommendationSystem):
+    def __init__(self, movie_data_path="tmdb_5000_movies.csv", 
+                 music_data_path="extended_data_by_genres.csv", 
+                 model_path="word2vec.model"):
+        super().__init__(movie_data_path, music_data_path, model_path)
+        
+    def find_track(self, track_name: str) -> Union[None, pd.Series]:
+        """Finds track using fuzzy matching."""
+        best_match = process.extractOne(track_name, self.music_df["track_names"].tolist(), score_cutoff=80)
+        if best_match:
+            return self.music_df[self.music_df["track_names"] == best_match[0]].iloc[0]
+        return None
+
+    def recommend_movies(self, track_name: str, num_recommendations=5):
+        """Recommends movies based on music track genres."""
+        idx = self.music_df[self.music_df["track_names"].str.lower() == track_name.lower()].index
+        if len(idx) == 0:
+            return "Track not found!"
+        
+        idx = idx[0]
+        track_vector = self.music_df.iloc[idx]["genre_embeddings"]
+
+        # Compute similarity with movies
+        similarities = cosine_similarity([track_vector], np.stack(self.movies_df["genre_embeddings"].values))[0]
+        top_indices = np.argsort(similarities)[::-1][:num_recommendations]
+        
+        return self.movies_df.iloc[top_indices][["title", "overview", "vote_average", "popularity"]].to_dict('records')
