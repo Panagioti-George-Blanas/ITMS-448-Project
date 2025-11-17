@@ -29,3 +29,39 @@ def word_tokenize(text):
     tokens = [token.lemma_.lower() for token in doc if not token.is_stop and not token.is_punct]
     return tokens
 
+class GenreRecommendationSystem:
+    def __init__(self, movie_data_path="tmdb_5000_movies.csv", 
+                 music_data_path="extended_data_by_genres.csv", 
+                 model_path="word2vec.model"):
+        self.movie_data_path = movie_data_path
+        self.music_data_path = music_data_path
+        self.model_path = model_path
+        self.nlp = spacy.load("en_core_web_sm")
+
+        # Load datasets
+        self.movies_df = pd.read_csv(self.movie_data_path)
+        self.music_df = pd.read_csv(self.music_data_path)
+
+        # Preprocess genres
+        self.movies_df["processed_genres"] = self.movies_df["genres"].apply(self.preprocess_genres)
+        self.music_df["processed_genres"] = self.music_df["genres"].apply(lambda x: x.lower())
+
+        # Load or train Word2Vec model
+        self.word2vec_model = self.load_or_train_model()
+
+        # Generate genre embeddings
+        self.movies_df["genre_embeddings"] = self.movies_df["processed_genres"].apply(self.genre_vector)
+        self.music_df["genre_embeddings"] = self.music_df["processed_genres"].apply(self.genre_vector)
+
+        # Compute TF-IDF similarity matrix
+        self.tfidf = TfidfVectorizer()
+        self.tfidf_matrix = self.tfidf.fit_transform(self.movies_df["processed_genres"])
+        self.genre_sim_matrix = cosine_similarity(self.tfidf_matrix)
+
+    def preprocess_genres(self, genres_str):
+        """Extracts genre names from JSON string."""
+        try:
+            genres_list = [genre["name"].lower() for genre in json.loads(genres_str)]
+            return " ".join(genres_list)
+        except:
+            return ""
