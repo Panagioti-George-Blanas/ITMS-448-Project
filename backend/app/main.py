@@ -140,3 +140,20 @@ class BidirectionalRecommendationSystem(GenreRecommendationSystem):
         top_indices = np.argsort(similarities)[::-1][:num_recommendations]
         
         return self.movies_df.iloc[top_indices][["title", "overview", "vote_average", "popularity"]].to_dict('records')
+def get_spotify_preview(track_name, limit=1):
+    """Fetches Spotify track information."""
+    results = sp.search(q=track_name, type='track', limit=limit)
+    
+    songs = []
+    for track in results['tracks']['items']:
+        song_data = {
+            "track_name": track["name"],
+            "artist": ", ".join([artist["name"] for artist in track["artists"]]),
+            "spotify_url": track["external_urls"]["spotify"],
+            "preview_url": track["preview_url"],
+            "album_name": track["album"]["name"],
+            "album_cover": track["album"]["images"][0]["url"] if track["album"]["images"] else None
+        }
+        songs.append(song_data)
+    
+    return pd.DataFrame(songs)
