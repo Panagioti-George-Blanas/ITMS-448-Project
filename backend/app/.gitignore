@@ -1,9 +1,0 @@
-# This is where we make sure that .env doesn't get committed to Git repository. Code is copy-pasted, make sure to verify. -Henry
-
-# Ignore environment variables
-.env
-
-# Ignore Python cache
-__pycache__/
-*.pyc
-
