@@ -8,18 +8,20 @@
     <h2>Movie Recommendations Based on Your Recently Played Songs</h2>
 
     {% if recommendations %}
-    		<ul>
-    		{% for rec in recommendations %}
-        		<li>
-            		<b>Song:</b> {{ rec['based_on_song'] }} by {{ rec['based_on_artist'] }}<br>
-            		<b>Movie:</b> {{ rec['movie_title'] }}<br>
-            		<b>Summary:</b> {{ rec['details'].get("overview") or rec['details'].get("Plot") or "No summary available." }}
-    				</li><br>
-    		{% endfor %}
-    		</ul>
-		{% else %}
-    		<h3>No recently played tracks found 😢</h3>
-		{% endif %}
-
+        <ul>
+        {% for rec in recommendations %}
+            <li>
+                <b>Song:</b> {{ rec.based_on_song }} by {{ rec.based_on_artist }}<br>
+                <b>Movie:</b> {{ rec.movie_title }}<br>
+                <b>Summary:</b> {{ rec.details.plot if rec.details else "No summary available." }}<br>
+                {% if rec.details and rec.details.poster %}
+                    <img src="{{ rec.details.poster }}" alt="Poster" width="200"><br>
+                {% endif %}
+            </li><br>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <h3>Sorry. No recently played tracks found.</h3>
+    {% endif %}
 </body>
 </html>

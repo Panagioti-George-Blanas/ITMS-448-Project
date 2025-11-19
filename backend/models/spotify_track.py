@@ -7,31 +7,23 @@ class SpotifyTrack:
         self.album_image = album_image
         self.spotify_url = spotify_url
 
+
+#  convert Spotify API track JSON into a SpotifyTrack object.
     @classmethod
     def from_spotify_json(cls, data):
-        """
-        Convert Spotify API track JSON into a SpotifyTrack object.
-        """
+
         if not data:
             return None
 
+				# track name
         name = data.get("name")
         
-        # Get first artist name safely
+        # Get artist name
         artists = data.get("artists", [])
         artist = artists[0]["name"] if artists else None
 
-        # Get album image URL safely
-        album_image = None
-        album = data.get("album")
-        if album and "images" in album and len(album["images"]) > 0:
-            album_image = album["images"][0].get("url")
-
-        # Get Spotify track URL safely
-        spotify_url = data.get("external_urls", {}).get("spotify")
-
         if not name or not artist:
-            # Skip tracks without basic info
             return None
 
+				# construct and return SpotifyTrack instance
         return cls(name=name, artist=artist, album_image=album_image, spotify_url=spotify_url)
