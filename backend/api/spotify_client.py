@@ -25,7 +25,8 @@ class SpotifyClient:
             "client_id": self.client_id,
             "response_type": "code",
             "redirect_uri": self.redirect_uri,
-            "scope": "user-read-recently-played"
+            "scope": "user-read-recently-played",
+            "show_dialog": "true"  # force login each time
         }
         return f"{self.AUTH_URL}?{urlencode(params)}"
 
@@ -41,9 +42,9 @@ class SpotifyClient:
         response.raise_for_status()
         return response.json()
 
-    def get_recent_tracks(self, access_token):
+    def get_recent_tracks(self, access_token, limit=10):
         headers = {"Authorization": f"Bearer {access_token}"}
-        url = f"{self.API_BASE}/me/player/recently-played?limit=10"
+        url = f"{self.API_BASE}/me/player/recently-played?limit={limit}"
         response = requests.get(url, headers=headers)
         response.raise_for_status()
         return response.json()
