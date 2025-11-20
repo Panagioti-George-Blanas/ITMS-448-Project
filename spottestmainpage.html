@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spottest - Home</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 40px;
+      background: #000;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1db954;
+    }
+
+    .search {
+      width: 450px;
+      padding: 12px 15px;
+      border-radius: 25px;
+      border: none;
+      background: #111;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      margin-top: 30px;
+    }
+
+    .topic-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-left: 40px;
+      margin-top: 10px;
+    }
+
+    .topic-section-title {
+      font-size: 35px;
+      font-weight: 900;
+      margin: 40px 40px 10px;
+    }
+
+    .subtitle-green {
+      color: #1db954;
+    }
+
+    .scroll-row {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px 40px;
+      gap: 20px;
+      scroll-behavior: smooth;
+    }
+
+    .scroll-row::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .scroll-row::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 5px;
+    }
+
+    .card {
+      min-width: 160px;
+      background: #111;
+      border-radius: 15px;
+      padding: 12px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .movie-title {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .movie-desc {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .show-all {
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+
+    .reroll {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 30px;
+      background: #1db954;
+      color: #000;
+      border-radius: 25px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="brand">🎬 COMPANY NAME</div>
+    <input type="text" class="search" placeholder="Search Movies or Songs" />
+  </div>
+
+  <button class="reroll">🔄 Re-Roll Recommendations</button>
+
+  <div class="topic-section-title subtitle-green">Movies by Topics</div>
+
+  <div id="topicsContainer"></div>
+
+<script>
+const exampleMovies = [
+  { title: 'Movie 1', desc: 'Movie Description 1', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 2', desc: 'Movie Description 2', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 3', desc: 'Movie Description 3', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 4', desc: 'Movie Description 4', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 5', desc: 'Movie Description 5', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 6', desc: 'Movie Description 6', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 7', desc: 'Movie Description 7', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 8', desc: 'Movie Description 8', img: 'https://placehold.co/300x300' }
+];
+
+const topics = ['TOPIC 1', 'TOPIC 2', 'TOPIC 3', 'TOPIC 4'];
+
+function createTopic(topicName) {
+  const container = document.createElement('div');
+
+  container.innerHTML = `
+    <div class="section-header">
+      <div class="topic-title">${topicName}</div>
+      <div class="show-all">Show all →</div>
+    </div>
+    <div class="scroll-row">${exampleMovies
+      .map(
+        m => `
+      <div class="card">
+        <img src="${m.img}" />
+        <div class="movie-title">${m.title}</div>
+        <div class="movie-desc">${m.desc}</div>
+      </div>`
+      )
+      .join('')}
+    </div>
+  `;
+
+  return container;
+}
+
+const topicsContainer = document.getElementById('topicsContainer');
+topics.forEach(topic => topicsContainer.appendChild(createTopic(topic)));
+</script>
+
+</body>
+</html>
