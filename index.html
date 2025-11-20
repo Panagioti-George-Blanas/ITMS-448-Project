@@ -4,112 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login UI</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: repeating-linear-gradient(
-        90deg,
-        #04d683 0 40px,
-        #00c076 40px 80px
-      );
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .card {
-      width: 380px;
-      background: rgba(0, 0, 0, 0.85);
-      padding: 40px 30px;
-      border-radius: 20px;
-      text-align: center;
-      color: white;
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .subtitle {
-      margin-bottom: 25px;
-      line-height: 1.4;
-    }
-
-    .spotify-btn {
-      background: #1db954;
-      border: none;
-      width: 100%;
-      padding: 12px;
-      border-radius: 20px;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: white;
-    }
-
-    .divider {
-      margin: 20px 0;
-      opacity: 0.4;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      margin-top: 10px;
-      background: #222;
-      color: white;
-    }
-
-    .options {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 5px;
-      font-size: 12px;
-    }
-
-    .login-btn {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background: #1db954;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .footer {
-      margin-top: 20px;
-      font-size: 12px;
-      opacity: 0.7;
-    }
-
-    /* Loading overlay */
-    #loadingOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 24px;
-      z-index: 999;
-    }
-  </style>
-
+  <link rel="stylesheet" href="styles.css" />
+  
   <script>
     window.onload = function () {
       // Auto-fill email if "Remember me" was used
@@ -144,7 +40,7 @@
 
       // Redirect after 1 second
       setTimeout(() => {
-        window.location.href = "spottestmainpage.html";
+        window.location.href = "mainpage.html";
       }, 1000);
     }
   </script>
@@ -157,7 +53,6 @@
     <div class="logo">COMPANY NAME</div>
     <div class="subtitle">Get personalized movie recommendations based on your Spotify activity</div>
 
-    <!-- Updated Spotify login button -->
     <a href="https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F" class="spotify-btn">
       Continue with Spotify
     </a>
@@ -174,7 +69,7 @@
         <label>
           <input type="checkbox" id="rememberMe" /> Keep me signed in
         </label>
-        <a href="#" style="color: #1db954">Forgot password?</a>
+        <a href="#">Forgot password?</a>
       </div>
 
       <button type="submit" class="login-btn">Login</button>
