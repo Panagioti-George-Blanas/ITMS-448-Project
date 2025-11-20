@@ -12,7 +12,7 @@ service = RecommendationService()
 
 @app.route("/")
 def index():
-    return '<h2>Welcome!</h2><a href="/login">Login with Spotify</a>'
+    return render_template("index.html")
 
 
 ## redirect user to spotify OAuth URL
@@ -36,7 +36,7 @@ def callback():
 
     # pass recent tracks, TasteDive results, and final recommendations
     return render_template(
-        "recommendations.html",
+        "spottestmainpage.html",
         tracks=tracks,
         td_debug=td_debug,
         recommendations=recommendations
