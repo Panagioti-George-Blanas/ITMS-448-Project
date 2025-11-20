@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="index.css">
   <title>Login UI</title>
-  <link rel="stylesheet" href="styles.css" />
   
+
   <script>
     window.onload = function () {
       // Auto-fill email if "Remember me" was used
@@ -40,7 +41,7 @@
 
       // Redirect after 1 second
       setTimeout(() => {
-        window.location.href = "mainpage.html";
+        window.location.href = "spottestmainpage.html";
       }, 1000);
     }
   </script>
@@ -53,6 +54,7 @@
     <div class="logo">COMPANY NAME</div>
     <div class="subtitle">Get personalized movie recommendations based on your Spotify activity</div>
 
+    <!-- Updated Spotify login button -->
     <a href="https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F" class="spotify-btn">
       Continue with Spotify
     </a>
@@ -69,7 +71,7 @@
         <label>
           <input type="checkbox" id="rememberMe" /> Keep me signed in
         </label>
-        <a href="#">Forgot password?</a>
+        <a href="#" style="color: #1db954">Forgot password?</a>
       </div>
 
       <button type="submit" class="login-btn">Login</button>
