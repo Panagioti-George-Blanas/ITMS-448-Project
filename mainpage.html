@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="brand">🎬 COMPANY NAME</div>
+    <input type="text" class="search" placeholder="Search Movies or Songs" />
+  </div>
+
+  <button class="reroll">🔄 Re-Roll Recommendations</button>
+
+  <div class="topic-section-title subtitle-green">Movies by Topics</div>
+
+  <div id="topicsContainer"></div>
+
+<script>
+const exampleMovies = [
+  { title: 'Movie 1', desc: 'Movie Description 1', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 2', desc: 'Movie Description 2', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 3', desc: 'Movie Description 3', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 4', desc: 'Movie Description 4', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 5', desc: 'Movie Description 5', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 6', desc: 'Movie Description 6', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 7', desc: 'Movie Description 7', img: 'https://placehold.co/300x300' },
+  { title: 'Movie 8', desc: 'Movie Description 8', img: 'https://placehold.co/300x300' }
+];
+
+const topics = ['TOPIC 1', 'TOPIC 2', 'TOPIC 3', 'TOPIC 4'];
+
+function createTopic(topicName) {
+  const container = document.createElement('div');
+
+  container.innerHTML = `
+    <div class="section-header">
+      <div class="topic-title">${topicName}</div>
+      <div class="show-all">Show all →</div>
+    </div>
+    <div class="scroll-row">${exampleMovies
+      .map(
+        m => `
+      <div class="card">
+        <img src="${m.img}" />
+        <div class="movie-title">${m.title}</div>
+        <div class="movie-desc">${m.desc}</div>
+      </div>`
+      )
+      .join('')}
+    </div>
+  `;
+
+  return container;
+}
+
+const topicsContainer = document.getElementById('topicsContainer');
+topics.forEach(topic => topicsContainer.appendChild(createTopic(topic)));
+</script>
+
+</body>
+</html>

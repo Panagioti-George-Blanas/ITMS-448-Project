@@ -1,0 +1,126 @@
+
+/*The CSS file stylizing both webpages. Peter did this part, but I moved it over to a separate CSS page 
+* in order to be cleaner. Good HTML coding practices should not have everything in the html page!!!
+* -HENRY
+*/
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 40px;
+      background: #000;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1db954;
+    }
+
+    .search {
+      width: 450px;
+      padding: 12px 15px;
+      border-radius: 25px;
+      border: none;
+      background: #111;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      margin-top: 30px;
+    }
+
+    .topic-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-left: 40px;
+      margin-top: 10px;
+    }
+
+    .topic-section-title {
+      font-size: 35px;
+      font-weight: 900;
+      margin: 40px 40px 10px;
+    }
+
+    .subtitle-green {
+      color: #1db954;
+    }
+
+    .scroll-row {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px 40px;
+      gap: 20px;
+      scroll-behavior: smooth;
+    }
+
+    .scroll-row::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .scroll-row::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 5px;
+    }
+
+    .card {
+      min-width: 160px;
+      background: #111;
+      border-radius: 15px;
+      padding: 12px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .movie-title {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .movie-desc {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .show-all {
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+
+    .reroll {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 30px;
+      background: #1db954;
+      color: #000;
+      border-radius: 25px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
