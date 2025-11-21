@@ -22,7 +22,7 @@ class RecommendationService:
         for item in items:
             track_data = item.get("track", {})
             track = SpotifyTrack.from_spotify_json(track_data)
-            if track.name and track.artist:
+            if track and track.name and track.artist:
                 tracks.append(track)
         return tracks
 
