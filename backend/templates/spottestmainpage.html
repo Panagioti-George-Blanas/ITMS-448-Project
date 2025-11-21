@@ -165,7 +165,7 @@
 
   <button class="reroll" onclick="window.location.href='/login'">🔄 Re-Roll Recommendations</button>
 
-  <!-- Recent Tracks Section (Optional Debug) -->
+  <!-- Display Recent Tracks Section -->
   {% if tracks %}
   <div class="debug-section">
     <div class="debug-title">Your Recent Spotify Tracks</div>
@@ -177,15 +177,7 @@
   </div>
   {% endif %}
 
-  <!-- TasteDive Debug Info (Optional) -->
-  {% if td_debug %}
-  <div class="debug-section">
-    <div class="debug-title">TasteDive API Response</div>
-    <pre style="overflow-x: auto;">{{ td_debug }}</pre>
-  </div>
-  {% endif %}
-
-  <!-- Movie Recommendations -->
+  <!-- Display Movie Recommendations -->
   <div class="topic-section-title subtitle-green">Movies Based on Your Music Taste</div>
 
   <div class="scroll-row">
@@ -214,27 +206,6 @@
       </div>
     {% endif %}
   </div>
-
-  <!-- Optional: Group by Topics if you have that data -->
-  <div class="topic-section-title subtitle-green">Movies by Topics</div>
   
-  <div class="section-header">
-    <div class="topic-title">Action & Adventure</div>
-    <div class="show-all">Show all →</div>
-  </div>
-  
-    <div class="scroll-row">
-    {% for movie in recommendations[:4] %}
-    <div class="card">
-      <img 
-        src="{{ movie.details.poster if movie.details and movie.details.poster else 'https://placehold.co/300x400' }}" 
-        alt="{{ movie.movie_title }}"
-      />
-      <div class="movie-title">
-        {{ movie.details.title if movie.details and movie.details.title else movie.movie_title }}
-      </div>
-    </div>
-    {% endfor %}
-  </div?>
 </body>
 </html>
