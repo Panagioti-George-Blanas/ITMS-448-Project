@@ -1,4 +1,4 @@
-# better_Toone
+# Big Music
 A program that connects to your spotify and gives you a movie based on your recently listened songs.
 
 --
